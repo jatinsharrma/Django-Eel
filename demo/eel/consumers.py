@@ -4,6 +4,7 @@ from . import _js_functions, _websockets, _import_js_function, \
 			  _mock_queue_done, _mock_queue, _process_message, \
 			  _on_close_callback, sleep, spawn
 import json as jsn
+import threading
 
 class EelConsumer(WebsocketConsumer):
 
@@ -32,9 +33,14 @@ class EelConsumer(WebsocketConsumer):
 		if text_data is not None:
 			if isinstance(text_data, str):
 				text_data = jsn.loads(text_data)
-			# [ISSUE] gevent.spawn seems not working correctly...
-			#spawn(_process_message, text_data, self)
-			_process_message(text_data, self)
+			# [NOTE] gevent.spawn seems not working correctly with Django
+			# and Celery is not working because of lmabda pickling issue
+			# replacing original statement:
+			# > spawn(_process_message, text_data, self)
+			# by simple theading:
+			t = threading.Thread(target=_process_message, args=(text_data, self), kwargs={})
+			t.setDaemon(True)
+			t.start()
 		else:
 			_websockets.remove((page, self))
 			pass
