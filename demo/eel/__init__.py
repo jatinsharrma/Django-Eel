@@ -18,6 +18,8 @@ _start_geometry = {}
 _mock_queue = []
 _mock_queue_done = set()
 _on_close_callback = None
+_call_return_values = {}
+_call_return_callbacks = {}
 
 # Public functions
 
@@ -72,9 +74,7 @@ def sleep(seconds):
     gvt.sleep(seconds)
 
 def spawn(function, *args, **kwargs):
-    print('before spawn')
     gvt.spawn(function, *args, **kwargs)
-    print('end spawn')
 
 # Routes
 # @route('/eel.js')
@@ -122,8 +122,10 @@ def _call_return(call):
 
     def return_func(callback=None):
         if callback is not None:
+            print('push in callback: %s' % callback)
             _call_return_callbacks[call_id] = callback
         else:
+            print('wait for call return values')
             for w in range(10000):
                 if call_id in _call_return_values:
                     return _call_return_values.pop(call_id)
@@ -134,10 +136,8 @@ def _import_js_function(f):
     exec('%s = lambda *args: _js_call("%s", args)' % (f, f), globals())
 
 def _process_message(message, ws):
-    print('in _process_message: message %s' % message)
     if 'call' in message:
         return_val = _exposed_functions[message['name']](*message['args'])
-        print('return_val: %s' % return_val)
         ws._repeated_send(jsn.dumps({  'return': message['call'],
                                         'value': return_val    })) 
     elif 'return' in message:

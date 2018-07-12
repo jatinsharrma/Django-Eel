@@ -28,21 +28,19 @@ class EelConsumer(WebsocketConsumer):
 
 
 	def receive(self, *, text_data):
-		print('incomming ws receive request. text_data: %s' % text_data)
 		page = self.scope['query_string'].decode("utf-8").split('=')[1]
-		print('page: %s' % page)
 		if text_data is not None:
-			#message = jsn.loads(msg)
-			print('going to spawn: %s, %s, %s' % (_process_message, text_data, self))
-			spawn(_process_message, text_data, self)
+			if isinstance(text_data, str):
+				text_data = jsn.loads(text_data)
+			# [ISSUE] gevent.spawn seems not working correctly...
+			#spawn(_process_message, text_data, self)
+			_process_message(text_data, self)
 		else:
 			_websockets.remove((page, self))
 			pass
 
 	def disconnect(self, message):
-		print('incomming ws disconnect request. message: %s' % message)
 		page = self.scope['query_string'].decode("utf-8").split('=')[1]
-		print('page: %s' % page)
 
 	def _repeated_send(self, msg):
 		for attempt in range(100):

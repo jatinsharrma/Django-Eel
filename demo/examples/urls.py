@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from .views import say_hello_py
+from .views import hello_page, callbacks_page
 
 urlpatterns = [
-    url(r'^hello$', say_hello_py),
+    url(r'^hello$', hello_page),
+    url(r'^callbacks$', callbacks_page),
 ]
