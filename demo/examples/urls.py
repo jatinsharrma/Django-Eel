@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from .views import hello_page, callbacks_page
+from .views import hello_page, callbacks_page, sync_callbacks_page, \
+				   file_access_page, input_page
 
 urlpatterns = [
     url(r'^hello$', hello_page),
     url(r'^callbacks$', callbacks_page),
+    url(r'^sync_callbacks$', sync_callbacks_page),
+    url(r'^file_access$', file_access_page),
+    url(r'^input$', input_page),
 ]
