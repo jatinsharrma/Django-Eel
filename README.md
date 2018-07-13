@@ -7,6 +7,12 @@ Django-Eel is a Django App for HTML GUI applications, with easy Python/JS intero
  - **master** : the master branch of Django-Eel
  - **eel-master** : keeping sync with [Eel](https://github.com/ChrisKnott/Eel)/master
 
+### Requirements
+
+ - Django ( >=2.0.7 recommended )
+ - channels ( >=2.1.2 recommended )
+ - gevent ( >=1.3.4 recommended )
+
 ### Getting Started
 
 #### Installation
