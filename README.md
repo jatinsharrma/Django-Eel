@@ -25,7 +25,7 @@ Create examples django app:
 ```
 django-admin startapp example
 ```
-Add **channels**, **eel**, and **example** to **demo/settings.py**
+Add **channels**, **django_eel**, and **example** to **demo/settings.py**
 ```python
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'channels',
-    'eel',
+    'django_eel',
     'example',
 ]
 ```
@@ -48,7 +48,7 @@ Add **routine.py** under **demo** project root. The **routine.py** routes websoc
 ```python
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.conf.urls import url
-from eel.consumers import EelConsumer
+from django_eel.consumers import EelConsumer
 
 application = ProtocolTypeRouter({
     # (http->django views is added by default)
@@ -61,7 +61,7 @@ Configure demo\urls.py to route http request to eel and example respectively.
 ```python
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^eel/', include('eel.urls')), # do not alter this line
+    url(r'^eel/', include('django_eel.urls')), # do not alter this line
     url(r'^example/', include('example.urls')), # set by your app name
 ]
 ```
@@ -101,7 +101,7 @@ This **hello.html** is almost the same as the original [Eel](https://github.com/
 Then we create the view 
 ```python
 from django.shortcuts import render
-import eel
+import django_eel as eel
 
 # initialize eel
 eel.init('example/templates/example')

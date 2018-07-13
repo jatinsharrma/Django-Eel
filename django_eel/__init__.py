@@ -5,10 +5,10 @@ import random as rnd
 import pkg_resources as pkg
 import json as jsn
 import gevent as gvt
-import eel.browsers as brw
+import django_eel.browsers as brw
 
-_js_root_dir = os.sep.join(['eel', 'static', 'eel', 'js'])
-_eel_js_file = pkg.resource_filename(pkg.Requirement.parse('django-eel'), 'eel/static/eel/js/eel.js')
+_js_root_dir = os.sep.join(['django_eel', 'static', 'eel', 'js'])
+_eel_js_file = pkg.resource_filename(pkg.Requirement.parse('django-eel'), 'django_eel/static/eel/js/eel.js')
 #_eel_js = open(os.sep.join([_js_root_dir, _eel_js_file]), encoding='utf-8').read()
 _eel_js = open(_eel_js_file, encoding='utf-8').read()
 

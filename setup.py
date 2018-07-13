@@ -24,7 +24,7 @@ setup(
     version='0.1',
     packages=find_packages(),
     package_data={
-        'eel': ['static/eel/js/eel.js'],
+        'django_eel': ['static/eel/js/eel.js'],
     },
     include_package_data=True,
     install_requires=requirements,

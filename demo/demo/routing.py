@@ -1,6 +1,6 @@
 from channels.routing import ProtocolTypeRouter, URLRouter
 from django.conf.urls import url
-from eel.consumers import EelConsumer
+from django_eel.consumers import EelConsumer
 
 application = ProtocolTypeRouter({
     # (http->django views is added by default)

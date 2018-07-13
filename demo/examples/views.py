@@ -1,5 +1,5 @@
 from django.shortcuts import render
-import eel
+import django_eel as eel
 import os, random
 
 # Create your views here.
