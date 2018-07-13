@@ -66,8 +66,8 @@ def input_page(request):
 # Open local page
 ###########################
 
-#eel.start('examples/hello', size=(300, 200))
+eel.start('examples/hello', size=(300, 200))
 #eel.start('examples/callbacks', size=(300, 200))
 #eel.start('examples/sync_callbacks', size=(300, 200))
 #eel.start('examples/file_access', size=(300, 200))
-eel.start('examples/input', size=(300, 200))
+#eel.start('examples/input', size=(300, 200))

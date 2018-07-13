@@ -29,7 +29,6 @@ _default_options = {
 }
 
 # Public functions
-
 def expose(name_or_function=None):
     # Deal with '@eel.expose()' - treat as '@eel.expose'
     if name_or_function is None:
@@ -77,6 +76,7 @@ def init(path):
     for js_function in _js_functions:
         _mock_js_function(js_function)
 
+# start localhost browsing
 def start(*start_urls, **kwargs):
     global _on_close_callback
 
@@ -108,21 +108,20 @@ def sleep(seconds):
 def spawn(function, *args, **kwargs):
     gvt.spawn(function, *args, **kwargs)
 
-# Routes
-# @route('/eel.js')
+# Routes : eel/urls.py
+# intercepts request of `eel.js`, 
+# replaces /** _py_functions **/ and /** _start_geometry **/
 def _eel(request):
     funcs = list(_exposed_functions.keys())
     page = _eel_js.replace('/** _py_functions **/',
                            '_py_functions: %s,' % funcs)
     page = page.replace('/** _start_geometry **/',
                         '_start_geometry: %s,' % jsn.dumps(_start_geometry))
-    #btl.response.content_type = 'application/javascript'
     response = HttpResponse(content=page)
     response['Content-Type'] = 'application/javascript'
     return response
 
 # Private functions
-
 def _expose(name, function):
     msg = 'Already exposed function with name "%s"' % name
     assert name not in _exposed_functions, msg
@@ -154,10 +153,8 @@ def _call_return(call):
 
     def return_func(callback=None):
         if callback is not None:
-            print('push in callback: %s' % callback)
             _call_return_callbacks[call_id] = callback
         else:
-            print('wait for call return values')
             for w in range(10000):
                 if call_id in _call_return_values:
                     return _call_return_values.pop(call_id)

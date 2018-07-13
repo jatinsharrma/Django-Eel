@@ -1,5 +1,4 @@
 from channels.generic.websocket import WebsocketConsumer
-from channels.consumer import SyncConsumer
 from . import _js_functions, _websockets, _import_js_function, \
 			  _mock_queue_done, _mock_queue, _process_message, \
 			  _on_close_callback, sleep, spawn
@@ -9,9 +8,6 @@ import threading
 class EelConsumer(WebsocketConsumer):
 
 	def connect(self):
-		print('incomming ws connection request.')
-		print('query string: %s' % self.scope['query_string'])
-
 		global _websockets
 
 		for js_function in _js_functions:
