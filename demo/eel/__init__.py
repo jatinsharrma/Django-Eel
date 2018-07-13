@@ -5,6 +5,7 @@ import random as rnd
 import pkg_resources as pkg
 import json as jsn
 import gevent as gvt
+import eel.browsers as brw
 
 _js_root_dir = os.sep.join(['eel', 'static', 'eel', 'js'])
 _eel_js_file = pkg.resource_filename('eel.static.eel.js', 'eel.js')
@@ -20,6 +21,12 @@ _mock_queue_done = set()
 _on_close_callback = None
 _call_return_values = {}
 _call_return_callbacks = {}
+_default_options = {
+    'mode': 'chrome-app',
+    'host': 'localhost',
+    'port': 8000,
+    'chromeFlags': []
+}
 
 # Public functions
 
@@ -69,6 +76,31 @@ def init(path):
     _js_functions = list(js_functions)
     for js_function in _js_functions:
         _mock_js_function(js_function)
+
+def start(*start_urls, **kwargs):
+    global _on_close_callback
+
+    block = kwargs.pop('block', True)
+    options = kwargs.pop('options', {})
+    size = kwargs.pop('size', None)
+    position = kwargs.pop('position', None)
+    geometry = kwargs.pop('geometry', {})
+    _on_close_callback = kwargs.pop('callback', None)
+
+    for k, v in list(_default_options.items()):
+        if k not in options:
+            options[k] = v
+
+    _start_geometry['default'] = {'size': size, 'position': position}
+    _start_geometry['pages'] = geometry
+
+    if options['port'] == 0:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.bind(('localhost', 0))
+        options['port'] = sock.getsockname()[1]
+        sock.close()
+
+    brw.open(start_urls, options)
 
 def sleep(seconds):
     gvt.sleep(seconds)

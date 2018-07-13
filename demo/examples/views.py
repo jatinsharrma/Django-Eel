@@ -61,3 +61,13 @@ def handleinput(x):
 def input_page(request):
 	eel.say_hello_js('connected!')
 	return render(request, 'examples/main.html')
+
+###########################
+# Open local page
+###########################
+
+#eel.start('examples/hello', size=(300, 200))
+#eel.start('examples/callbacks', size=(300, 200))
+#eel.start('examples/sync_callbacks', size=(300, 200))
+#eel.start('examples/file_access', size=(300, 200))
+eel.start('examples/input', size=(300, 200))
