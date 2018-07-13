@@ -2,6 +2,11 @@
 
 Django-Eel is a Django App for HTML GUI applications, with easy Python/JS interoperation. It is a porting version of [Eel](https://github.com/ChrisKnott/Eel).
 
+### Repo branches
+
+ - **master** : the master branch of Django-Eel
+ - **eel-master** : keeping sync with [Eel](https://github.com/ChrisKnott/Eel)/master
+
 ### Getting Started
 
 #### Installation
