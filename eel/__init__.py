@@ -8,8 +8,9 @@ import gevent as gvt
 import eel.browsers as brw
 
 _js_root_dir = os.sep.join(['eel', 'static', 'eel', 'js'])
-_eel_js_file = pkg.resource_filename('eel.static.eel.js', 'eel.js')
-_eel_js = open(os.sep.join([_js_root_dir, _eel_js_file]), encoding='utf-8').read()
+_eel_js_file = pkg.resource_filename(pkg.Requirement.parse('django-eel'), 'eel/static/eel/js/eel.js')
+#_eel_js = open(os.sep.join([_js_root_dir, _eel_js_file]), encoding='utf-8').read()
+_eel_js = open(_eel_js_file, encoding='utf-8').read()
 
 _websockets = []
 _exposed_functions = {}
