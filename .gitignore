@@ -7,3 +7,5 @@ django_eel.egg-info
 .DS_Store
 *.pyc
 *.sqlite3
+# pypi config
+.pypirc
