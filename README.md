@@ -23,6 +23,10 @@ python setup.py install
 ```
 Or install through PIP:
 ```
+pip install django-eel
+```
+Alternatively by git source for latest version:
+```
 pip install git+https://github.com/seLain/django-eel
 ```
 
