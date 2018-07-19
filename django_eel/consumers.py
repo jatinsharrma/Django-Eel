@@ -39,7 +39,6 @@ class EelConsumer(WebsocketConsumer):
 			t.start()
 		else:
 			_websockets.remove((page, self))
-			pass
 
 	def disconnect(self, message):
 		#page = self.scope['query_string'].decode("utf-8").split('=')[1]

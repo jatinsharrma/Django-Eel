@@ -67,8 +67,8 @@ def init(path):
                     for expose_call in finder:
                         expose_call = expose_call.strip()
                         msg = "eel.expose() call contains '(' or '='"
-                        assert rgx.findall(
-                            r'[\(=]', expose_call) == [], msg
+                        if rgx.findall(r'[\(=]', expose_call) != []:
+                            raise AssertionError(msg)
                         expose_calls.add(expose_call)
                     js_functions.update(expose_calls)
             except UnicodeDecodeError:
@@ -82,7 +82,6 @@ def init(path):
 def start(*start_urls, **kwargs):
     global _on_close_callback
 
-    block = kwargs.pop('block', True)
     options = kwargs.pop('options', {})
     size = kwargs.pop('size', None)
     position = kwargs.pop('position', None)
@@ -111,7 +110,7 @@ def spawn(function, *args, **kwargs):
     gvt.spawn(function, *args, **kwargs)
 
 # Routes : eel/urls.py
-# intercepts request of `eel.js`, 
+# intercepts request of `eel.js`,
 # replaces /** _py_functions **/ and /** _start_geometry **/
 def _eel(request):
     funcs = list(_exposed_functions.keys())
@@ -126,7 +125,8 @@ def _eel(request):
 # Private functions
 def _expose(name, function):
     msg = 'Already exposed function with name "%s"' % name
-    assert name not in _exposed_functions, msg
+    if name in _exposed_functions:
+        raise AssertionError(msg)
     _exposed_functions[name] = function
 
 def _get_real_path(path):
@@ -170,7 +170,7 @@ def _process_message(message, ws):
     if 'call' in message:
         return_val = _exposed_functions[message['name']](*message['args'])
         ws._repeated_send(jsn.dumps({  'return': message['call'],
-                                        'value': return_val    })) 
+                                        'value': return_val    }))
     elif 'return' in message:
         call_id = message['return']
         if call_id in _call_return_callbacks:
