@@ -1,3 +1,8 @@
+[![Python Support](https://img.shields.io/badge/python-3.6-blue.svg)]()
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/09e269d7f2414f2581cbcf34da1abdf9)](https://www.codacy.com/app/seLain/Django-Eel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=seLain/Django-Eel&amp;utm_campaign=Badge_Grade)
+[![Code Health](https://landscape.io/github/seLain/Django-Eel/master/landscape.svg?style=flat)](https://landscape.io/github/seLain/Django-Eel/master)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)]()
+
 # Django-Eel
 
 Django-Eel is a Django App for HTML GUI applications, with easy Python/JS interoperation. It is a porting version of [Eel](https://github.com/ChrisKnott/Eel).
