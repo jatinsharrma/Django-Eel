@@ -1,7 +1,7 @@
 from channels.generic.websocket import WebsocketConsumer
 from . import _js_functions, _websockets, _import_js_function, \
 			  _mock_queue_done, _mock_queue, _process_message, \
-			  _on_close_callback, sleep, spawn
+			  _on_close_callback, sleep
 import json as jsn
 import threading
 
@@ -42,10 +42,11 @@ class EelConsumer(WebsocketConsumer):
 			pass
 
 	def disconnect(self, message):
-		page = self.scope['query_string'].decode("utf-8").split('=')[1]
+		#page = self.scope['query_string'].decode("utf-8").split('=')[1]
+		pass
 
 	def _repeated_send(self, msg):
-		for attempt in range(100):
+		for _ in range(100):
 			try:
 				self.send(msg)
 			except Exception:

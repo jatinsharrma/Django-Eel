@@ -12,6 +12,7 @@ _eel_js_file = pkg.resource_filename(pkg.Requirement.parse('django-eel'), 'djang
 #_eel_js = open(os.sep.join([_js_root_dir, _eel_js_file]), encoding='utf-8').read()
 _eel_js = open(_eel_js_file, encoding='utf-8').read()
 
+root_path = ''
 _websockets = []
 _exposed_functions = {}
 _js_functions = []
@@ -35,7 +36,7 @@ def expose(name_or_function=None):
     if name_or_function is None:
         return expose
 
-    if type(name_or_function) == str:   # Called as '@eel.expose("my_name")'
+    if isinstance(name_or_function, str):   # Called as '@eel.expose("my_name")'
         name = name_or_function
 
         def decorator(function):
@@ -156,7 +157,7 @@ def _call_return(call):
         if callback is not None:
             _call_return_callbacks[call_id] = callback
         else:
-            for w in range(10000):
+            for _ in range(10000):
                 if call_id in _call_return_values:
                     return _call_return_values.pop(call_id)
                 sleep(0.001)
