@@ -1,6 +1,6 @@
 [![Python Support](https://img.shields.io/badge/python-3.6-blue.svg)]()
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/09e269d7f2414f2581cbcf34da1abdf9)](https://www.codacy.com/app/seLain/Django-Eel?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=seLain/Django-Eel&amp;utm_campaign=Badge_Grade)
-[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/197fb4a3a8a9b1a894b1/maintainability)](https://codeclimate.com/github/seLain/Django-Eel/maintainability)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)]()
 
 # Django-Eel
